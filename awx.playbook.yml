@@ -1,0 +1,38 @@
+---
+- name: Install AWX
+  hosts: awx
+  become: yes
+
+  vars:
+    ansible_distribution_major_version: 6
+
+  pre_tasks:
+
+  - name: Install Git
+    package:
+      name: git
+      state: present
+
+  - name: Install Python Pip
+    package:
+      name: python-pip
+      state: present
+
+  - name: Install Docker
+    package:
+      name: docker
+      state: present
+
+  - name: Install Docker PY
+    command: pip install docker-py
+
+  - name: Start Docker
+    service:
+      name: docker
+      state: started
+
+  roles:
+
+  - role: geerlingguy.ansible
+  - role: geerlingguy.nodejs
+  - role: geerlingguy.awx
