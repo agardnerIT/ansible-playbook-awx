@@ -13,11 +13,8 @@ This playbook uses the following roles:
 
 So install those first:
 
-`
-ansible-galaxy install geerlingguy.ansible
-ansible-galaxy install geerlingguy.nodejs
-ansible-galaxy install geerlingguy.awx
-`
+`ansible-galaxy install geerlingguy.ansible geerlingguy.nodejs geerlingguy.awx`
+
 
 ### EC2 Instance
 Minimum of a `t2.medium` is required.
