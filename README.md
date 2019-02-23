@@ -2,6 +2,8 @@
 
 Playbook to install AWX on Amazon AMIs.
 
+Login is **admin** / **password**
+
 ## Prerequisites
 
 ### Roles
