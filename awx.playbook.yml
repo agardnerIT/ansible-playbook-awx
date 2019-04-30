@@ -4,35 +4,42 @@
   become: yes
 
   vars:
-    ansible_distribution_major_version: 6
+    - tmpdir: "/tmp/ansible"
 
-  pre_tasks:
+  tasks:
 
-  - name: Install Git
-    package:
-      name: git
-      state: present
+  - name: Update yum
+    yum:
+      name: '*'
+      state: latest
 
-  - name: Install Python Pip
-    package:
-      name: python-pip
-      state: present
+  - name: Install Ansible
+    pip:
+      name: ansible
+      state: latest
 
-  - name: Install Docker
-    package:
-      name: docker
-      state: present
-
-  - name: Install Docker PY
-    command: pip install docker-py
+  - name: Install Repositories
+    yum:
+      name: "{{ item }}"
+    loop:
+      - git
+      - docker
 
   - name: Start Docker
     service:
       name: docker
       state: started
 
-  roles:
+  - name: Clone awx
+    git:
+      repo: 'https://github.com/ansible/awx.git'
+      dest: "{{ tmpdir }}"
+      clone: yes
 
-  - role: geerlingguy.ansible
-  - role: geerlingguy.nodejs
-  - role: geerlingguy.awx
+  - name: Install Docker Compose
+    pip:
+      name: docker-compose
+      state: latest
+
+  - name: Install AWX
+    command: /usr/local/bin/ansible-playbook -i {{ tmpdir }}/installer/inventory {{ tmpdir }}/installer/install.yml
