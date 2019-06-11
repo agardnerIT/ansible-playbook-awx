@@ -4,19 +4,5 @@ Playbook to install AWX on Amazon AMIs.
 
 Login is **admin** / **password**
 
-## Prerequisites
-
-### Roles
-This playbook uses the following roles:
-
-* geerlingguy.ansible
-* geerlingguy.nodejs
-* geerlingguy.awx
-
-So install those first:
-
-`ansible-galaxy install geerlingguy.ansible geerlingguy.nodejs geerlingguy.awx`
-
-
 ### EC2 Instance
 Minimum of a `t2.medium` is required.
