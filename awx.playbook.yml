@@ -38,8 +38,7 @@
 
   - name: Install Docker Compose
     pip:
-      name: docker-compose
-      state: latest
+      name: docker-compose==1.9.0
 
   - name: Install AWX
     command: /usr/local/bin/ansible-playbook -i {{ tmpdir }}/installer/inventory {{ tmpdir }}/installer/install.yml
